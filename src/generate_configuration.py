@@ -10,8 +10,8 @@ r2d = 180 / pi
 
 shape_config = {
 
-    'ENGINE': 'solid',  # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
-    # 'ENGINE': 'cadquery',  # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    # 'ENGINE': 'solid',  # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    'ENGINE': 'cadquery',  # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
 
 
     ######################
@@ -22,27 +22,28 @@ shape_config = {
     'config_name':  "DM",
 
     'show_caps': 'MX',
-    'show_pcbs': False, #only runs if caps are shown, easist place to initially inject geometry
+    'show_pcbs': False, #only runs if caps are shown, easist place to initially inject geometry 最初注入几何体的简单位置
 
     'nrows':  5, #5,  # key rows
     'ncols':  6, #6,  # key columns
 
-    'alpha':  pi / 12.0,  # curvature of the columns
-    'beta':  pi / 36.0,  # curvature of the rows
-    'centercol':  3,  # controls left_right tilt / tenting (higher number is more tenting)
-    'centerrow_offset':  3,  # rows from max, controls front_back tilt
-    'tenting_angle':  pi / 12.0,  # or, change this for more precise tenting control
+    'alpha':  pi / 12.0,  # curvature of the columns 列的曲率
+    'beta':  pi / 36.0,  # curvature of the rows 行的曲率
+    'centercol':  4,  # controls left_right tilt / tenting (higher number is more tenting) 控制 left_right tilt / tenting (数字越大越倾斜)
+    'centerrow_offset':  3,  # rows from max, controls front_back tilt  Rows from max，控制前后倾斜 
+    'tenting_angle':  pi / 15.0,  # or, change this for more precise tenting control 或者，更改它以获得更精确的帐篷控制
 
     # symmetry states if it is a symmetric or asymmetric bui.  If asymmetric it doubles the generation time.
-    'symmetry':  "symmetric",  # "asymmetric" or "symmetric"
+    # 说明它是对称的还是非对称的 bui。如果不对称，它会使生成时间加倍。
+    'symmetry':  "symmetric",  # "asymmetric" or "symmetric" “不对称”或“对称”
 
-    'column_style_gt5':  "orthographic",
+    'column_style_gt5':  "orthographic", # “正交”
     'column_style':  "standard",  # options include :standard, :orthographic, and :fixed
-    'reduced_inner_cols': 2,  #currently supports 0 or 2 due to thumb cluster attachment
+    'reduced_inner_cols': 2,  #currently supports 0 or 2 due to thumb cluster attachment  由于thumb集群连接，目前支持0或2 
     'reduced_outer_cols': 0,
 
 
-    'thumb_offsets':  [6, -3, 7],
+    'thumb_offsets':  [0, -3, 7],
     'keyboard_z_offset':  (
         11  # controls overall height# original=9 with centercol=3# use 16 for centercol=2
     ),
@@ -59,20 +60,26 @@ shape_config = {
 
     ##############################
     # THUMB PARAMETERS
+    # 拇指参数
     ##############################
 
     # 'DEFAULT' 6-key, 'MINI' 5-key, 'CARBONFET' 6-key, 'MINIDOX' 3-key, 'TRACKBALL_ORBYL', 'TRACKBALL_CJ'
     'thumb_style': 'DEFAULT',
     'default_1U_cluster': True, # only used with default, makes top right thumb cluster key 1U
     # Thumb key size.  May need slight oversizing, check w/ caps.  Additional spacing will be automatically added for larger keys.
+    # 拇指键大小。可能需要稍微加大尺寸，请检查带帽。较大的键会自动添加额外的间距。
     'minidox_Usize': 1.6,
     # Thumb plate rotations, anything other than 90 degree increments WILL NOT WORK.
+    # 拇指板旋转，任何不是 90 度的增量都将不起作用。
 
     'mini_index_key': True,
 
     # Screw locations and extra screw locations for separable thumb, all from thumb origin
     # Pulled out of hardcoding as drastic changes to the geometry may require fixes to the screw mounts.
     # First screw in separable should be similar to the standard location as it will receive the same modifiers.
+    # 可分离拇指的螺丝位置和额外的螺丝位置，均来自拇指原点
+    # 退出硬编码，因为几何形状的剧烈变化可能需要修复螺丝安装座。
+    # 可分离的第一个螺丝应该与标准位置相似，因为它将获得相同的修饰符。
     'default_thumb_screw_xy_locations': [[-21, -58]],
     'default_separable_thumb_screw_xy_locations': [[-21, -58]],
     'mini_thumb_screw_xy_locations': [[-29, -52]],
@@ -94,11 +101,13 @@ shape_config = {
     'thumb_plate_bl_rotation': 0.0,  # Bottom right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
     ##############################
     # EXPERIMENTAL
-    'separable_thumb': False,  #creates a separable thumb section with additional screws to hold it down.  Only attached at base.
+    # 实验
+    'separable_thumb': False,  #creates a separable thumb section with additional screws to hold it down.  Only attached at base. 仅连接在底座上。
     ##############################
 
     ###################################
     ## Trackball in Wall             ##
+    ## 墙上的轨迹球##
     ###################################
     'trackball_in_wall': False,  # Separate trackball option, placing it in the OLED area
     'tbiw_ball_center_row': 0.2, # up from cornerrow instead of down from top
@@ -116,6 +125,7 @@ shape_config = {
 
     ##########################################################################
     ## Finger Trackball in Wall EXPERIMENTAL WIP!!!!                        ##
+    ## 墙上的手指轨迹球实验 WIP!!!! ##
     ##########################################################################
     'finger_trackball_in_wall': False,  # Separate trackball option, placing it in the OLED area
     'tbiw_ball_center_column': 0.2,  # up from cornerrow instead of down from top
@@ -129,6 +139,7 @@ shape_config = {
 
     ###########################################
     ## Trackball JS / ORBYL Thumb Cluster    ##
+    ## 轨迹球 JS / ORBYL 拇指集群 ##
     ##########################################
     'other_thumb': 'DEFAULT', # cluster used for second thumb except if ball_side == 'both'
     'tbjs_key_diameter': 70,
@@ -156,6 +167,7 @@ shape_config = {
 
     ###################################
     ## Trackball CJ Thumb Cluster    ##
+    ## 轨迹球 CJ Thumb Cluster ##
     ###################################
     'tbcj_inner_diameter': 42,
     'tbcj_thickness': 2,
@@ -164,6 +176,7 @@ shape_config = {
 
     ###################################
     ## Trackball General             ##
+    ## 轨迹球通用##
     ###################################
     'trackball_modular': False,  # Added, creates a hole with space for the lip size listed below.
     'trackball_modular_lip_width': 3.0,  # width of lip cleared out in ring location
@@ -187,6 +200,7 @@ shape_config = {
 
     ##############################
     # EXPERIMENTAL PARAMETERS
+    # 实验参数
     ##############################
     'pinky_1_5U': False,  # LEAVE AS FALSE, CURRENTLY BROKEN
     'first_1_5U_row': 0,
@@ -205,7 +219,7 @@ shape_config = {
     'left_wall_lower_x_offset': 0,  # specific values for the lower left corner.
     'left_wall_lower_y_offset': 0,  # specific values for the lower left corner.
     'left_wall_lower_z_offset': 0,
-    'wall_thickness':  4.5,  # wall thickness parameter used on upper/mid stage of the wall
+    'wall_thickness':  3.0,  # wall thickness parameter used on upper/mid stage of the wall 墙的上/中阶段使用的壁厚参数
     'wall_base_y_thickness':  4.5,  # wall thickness at the lower stage
     'wall_base_x_thickness':  4.5,  # wall thickness at the lower stage
 
@@ -216,6 +230,11 @@ shape_config = {
     ##   http://patentimages.storage.googleapis.com/EP0219944A2/imgf0002.png
     ## fixed_z overrides the z portion of the column ofsets above.
     ## NOTE: THIS DOESN'T WORK QUITE LIKE I'D HOPED.
+    ## column_style 的设置 == :fixed
+    ## 默认值大致匹配 Maltron 设置
+    ## http://patentimages.storage.googleapis.com/EP0219944A2/imgf0002.png
+    ## fixed_z 覆盖上面列偏移的 z 部分。
+    ## 注意：这并不像我希望的那样有效。
     'fixed_angles':  [d2r * 10, d2r * 10, 0, 0, 0, d2r * -15, d2r * -15],
     'fixed_x':  [-41.5, -22.5, 0, 20.3, 41.4, 65.5, 89.6],  # relative to the middle finger
     'fixed_z':  [12.1, 8.3, 0, 5, 10.7, 14.5, 17.5],
@@ -223,18 +242,25 @@ shape_config = {
 
     #################
     ## Switch Hole ##
+    ## 开关孔 ##
     #################
 
     # plate options are
     # 'HOLE' = a square hole.  Also useful for applying custom plate files.
     # 'NUB' = original side nubs.
-    # 'UNDERCUT' = snap fit undercut.  May require CLIP_THICKNESS and possibly CLIP_UNDERCUT tweaking
-    #       and/or filing to get proper snap.
-    # 'NOTCH' = snap fit undercut only near switch clip.  May require CLIP_THICKNESS and possibly CLIP_UNDERCUT
-    #       tweaking and/or filing to get proper snap.
+    # 'UNDERCUT' = snap fit undercut.  May require CLIP_THICKNESS and possibly CLIP_UNDERCUT tweaking and/or filing to get proper snap.
+    # 'NOTCH' = snap fit undercut only near switch clip.  May require CLIP_THICKNESS and possibly CLIP_UNDERCUT tweaking and/or filing to get proper snap.
     # 'HS_NUB' = hot swap underside with nubs.
     # 'HS_UNDERCUT' = hot swap underside with undercut. Does not generate properly.  Hot swap step needs to be modified.
     # 'HS_NOTCH' = hot swap underside with notch.  Does not generate properly.  Hot swap step needs to be modified.
+    # 板块选项是
+    # 'HOLE' = 一个方形的孔。  对于应用定制版文件也很有用。
+    # 'NUB' = 原有的边角料。
+    # 'UNDERCUT' = snap fit undercut。  可能需要CLIP_THICKNESS和可能的CLIP_UNDERCUT调整和/或锉削以获得适当的扣合。
+    # 'NOTCH' = snap fit undercut only near switch clip.  可能需要CLIP_THICKNESS和可能的CLIP_UNDERCUT调整和/或锉削以获得适当的卡扣。
+    # 'HS_NUB' = 热插拔底面有小圆点。
+    # 'HS_UNDERCUT' = 热交换底面有下切。不能正确生成。  热交换步骤需要修改。
+    # 'HS_NOTCH' = 热交换底面有凹槽。  不能正常生成。  需要修改热交换步骤。
     # 'plate_style':  'NUB',
     'plate_style': 'NOTCH',
 
@@ -265,6 +291,7 @@ shape_config = {
 
     ##########################
     ## OLED Mount Location
+    ## OLED 安装位置
     ##########################
     # Initial pass will be manual placement.  Can be used to create other mounts as well.
     # Mount type options:
@@ -272,8 +299,14 @@ shape_config = {
     # 'UNDERCUT' = Simple rectangle with undercut for clip in item
     # 'SLIDING' = Features to slide the OLED in place and use a pin or block to secure from underneath.
     # 'CLIP' = Features to set the OLED in a frame a snap a bezel down to hold it in place.
+    # 初始通道将是手动放置。也可用于创建其他坐骑。
+    # 挂载类型选项：
+    # None 或 'NONE' = 无 OLED 安装
+    # 'UNDERCUT' = 带有底切的简单矩形，用于项目中的剪辑
+    # 'SLIDING' = 将 OLED 滑动到位并使用销或块从下方固定的功能。
+    # 'CLIP' = 将 OLED 设置在一个框架中的功能，一个向下的挡板将其固定到位。
 
-    'oled_mount_type':  'CLIP',
+    'oled_mount_type':  'NONE',
     'oled_center_row': 1.25, # if not None, this will override the oled_mount_location_xyz and oled_mount_rotation_xyz settings
     'oled_translation_offset': (0, 0, 4), # Z offset tweaks are expected depending on curvature and OLED mount choice.
     'oled_rotation_offset': (0, 0, 0),
@@ -353,7 +386,7 @@ shape_config = {
         }
     },
 
-    'screws_offset': 'INSIDE', # 'OUTSIDE', 'INSIDE', 'ORIGINAL'
+    'screws_offset': 'INSIDE', # 'OUTSIDE', 'INSIDE', 'ORIGINAL' 螺丝
 
     'screw_insert_height': 3.8,
 
@@ -366,6 +399,7 @@ shape_config = {
     'screw_insert_outer_radius': 4.25,  # Common to keep interface to base
 
     # Does anyone even use these?  I think they just get in the way.
+    # 有人甚至使用这些吗？我认为他们只是妨碍了。
     'wire_post_height': 7,
     'wire_post_overhang': 3.5,
     'wire_post_diameter': 2.6,
@@ -375,6 +409,7 @@ shape_config = {
 
     ###################################
     ## Controller Mount / Connectors ##
+    ## 控制器安装/连接器##
     ###################################
     # connector options are
     # 'RJ9_USB_WALL' = Standard internal plate with RJ9 opening and square cutout for connection.
@@ -383,17 +418,26 @@ shape_config = {
     # 'USB_TEENSY' = Teensy holder, no RJ9
     # 'EXTERNAL' = square cutout for a holder such as the one from lolligagger.
     # 'NONE' = No openings in the back.
+    # 连接器选项是
+    # 'RJ9_USB_WALL' = 带有 RJ9 开口和用于连接的方形切口的标准内板。
+    # 'USB_WALL' = 带有用于连接的方形切口的标准内板，无 RJ9。
+    # 'RJ9_USB_TEENSY' = Teensy 支架
+    # 'USB_TEENSY' = Teensy 支架，无 RJ9
+    # 'EXTERNAL' = 用于支架的方形切口，例如来自 lolligagger 的支架。
+    # 'NONE' = 背面没有开口。
     'controller_mount_type':  'EXTERNAL',
 
     'external_holder_height':  12.5,
     'external_holder_width':  28.75,
     'external_holder_xoffset': -5.0,
-    'external_holder_yoffset': -4.5, #Tweak this value to get the right undercut for the tray engagement.
+    'external_holder_yoffset': -4.5, #Tweak this value to get the right undercut for the tray engagement. Tweak 这个值以获得托盘接合的正确底切。
 
     # Offset is from the top inner corner of the top inner key.
+    # 偏移量是从顶部内键的顶部内角开始的。
 
     ###################################
     ## PCB Screw Mount               ##
+    ## PCB 螺丝安装 ##
     ###################################
     "pcb_mount_ref_offset": [0, -5, 0],
     "pcb_holder_size": [34.6, 7, 4],
@@ -414,6 +458,7 @@ shape_config = {
 
     ###################################
     ## Bottom Plate Dimensions
+    ## 底板尺寸
     ###################################
     # COMMON DIMENSION
     'screw_hole_diameter': 3,
@@ -428,6 +473,7 @@ shape_config = {
 
     ###################################
     ## HOLES ON PLATE FOR PCB MOUNT
+    ## PCB 安装板上的孔
     ###################################
     'plate_holes':  True,
     'plate_holes_xy_offset': (0.0, 0.0),
@@ -445,6 +491,7 @@ shape_config = {
 
     ###################################
     ## SHOW PCB FOR FIT CHECK
+    ## 显示 PCB 以进行适配检查
     ###################################
     'pcb_width': 18.0,
     'pcb_height': 18.0,
@@ -455,6 +502,7 @@ shape_config = {
 
     ###################################
     ## COLUMN OFFSETS
+    ## 列偏移量
     ####################################
 
     'column_offsets':  [
@@ -471,6 +519,7 @@ shape_config = {
 
     ####################################
     ## END CONFIGURATION SECTION
+    ## 结束配置部分
     ####################################
 
 def save_config():
