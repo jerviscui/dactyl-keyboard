@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3
+FROM jerviscui/miniconda3-aliyun:4.12.0
 
 RUN apt-get update && \
     apt-get install -y libgl1-mesa-glx gcc bash && \
